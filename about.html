@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us</title>
+  <link rel="stylesheet" href="assets/css/style.css"> <!-- Link to your custom CSS file -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://www.flaticon.com/free-icons/chef">
+  <script>
+
+document.addEventListener("DOMContentLoaded", () => {
+      function drawMainBullet(canvas) {
+        const ctx = canvas.getContext("2d");
+
+        // Draw a gradient-filled circle
+        const gradient = ctx.createRadialGradient(10, 10, 2, 10, 10, 10);
+        gradient.addColorStop(0, "#ff8a00");
+        gradient.addColorStop(1, "#cd001a");
+
+        ctx.fillStyle = gradient;
+        ctx.beginPath();
+        ctx.arc(10, 10, 10, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      function drawNestedBullet(canvas) {
+        const ctx = canvas.getContext("2d");
+
+        // Draw a smaller circle with a solid color
+        ctx.fillStyle = "#cd001a";
+        ctx.beginPath();
+        ctx.arc(6, 6, 6, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      // Apply drawings to all canvases
+      document.querySelectorAll(".bullet").forEach(drawMainBullet);
+      document.querySelectorAll(".nested-bullet").forEach(drawNestedBullet);
+    });
+  </script>
+
+  <style>
+    #auth-links {
+    display: flex; 
+    gap: 20px; 
+}
+
+#dashboard-links {
+    display: none; 
+    gap: 20px;
+}
+
+/* General Section Styling */
+.fun-facts-and-table {
+
+  gap: 24px;
+  align-items: flex-start;
+  margin: 20px 20px;
+  padding: 16px 16px;
+}
+
+.fun-facts, .baking-tools {
+  flex: 1 1 calc(50% - 24px); /* Flexible layout */
+  background-color: #fff8f2; /* Softer beige */
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s, box-shadow 0.3s;
+  margin: 30px;
+}
+
+
+/* Headings */
+.fun-facts h2, .baking-tools h2 {
+  font-size: 2rem;
+  color: #d0002b; /* Cherry red */
+  margin-bottom: 16px;
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Fun Facts List Styling */
+.fun-facts ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 16px;
+}
+
+.fun-facts ul > li {
+  font-size: 1.1em;
+  font-weight: 600;
+  color: #4a4a4a;
+  margin-bottom: 12px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.fun-facts ul ul {
+  margin-left: 20px;
+  margin-top: 8px;
+  list-style: none;
+}
+
+.fun-facts ul ul > li {
+  font-size: 1em;
+  font-weight: normal;
+  color: #666;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Canvas Styling */
+canvas {
+  display: inline-block;
+}
+
+/* Baking Tools Table Styling */
+.baking-tools table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 16px;
+  background-color: #fff;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.baking-tools th, .baking-tools td {
+  padding: 12px 16px;
+  text-align: left;
+  border: 1px solid #e0e0e0;
+}
+
+.baking-tools th {
+  background-color: #d0002b;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 0.9em;
+}
+
+.baking-tools tr:nth-child(even) td {
+  background-color: #f9f9f9;
+}
+
+.baking-tools tr:hover td {
+  background-color: #fef6e6;
+}
+
+.baking-tools td:first-child {
+  font-weight: bold;
+  color: #333;
+}
+
+/* About Us Section Styling */
+section.about-us {
+  padding: 20px;
+  margin: 20px 50px;
+  border-radius: 8px;
+}
+
+section.about-us h2 {
+  color: #CD001A; /* Cherry red for the heading */
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+section.about-us p {
+  font-size: 18px;
+  color: #333;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* Flex Container for the Lists */
+section.about-us .list-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 90px;
+  padding: 10px;
+  background-color: #fff; /* White background for the container */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+section.about-us dl, 
+section.about-us ol {
+  width: 45%; /* Makes the lists take up about half the width each */
+  padding: 10px;
+}
+
+
+section.about-us dt {
+  font-weight: bold;
+  font-size: 18px;
+  color: #333;
+  margin-top: 10px;
+}
+
+section.about-us dd {
+  font-size: 16px;
+  color: #555;
+  margin: 5px 0 15px 0;
+}
+
+/* Title for Ordered List */
+section.about-us ol {
+  list-style-type: decimal;
+  padding-left: 60px;
+}
+
+section.about-us ol li {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* Add titles for each list */
+section.about-us dl::before {
+  content: "Key Information"; /* Title for the definition list */
+  font-weight: bold;
+  font-size: 20px;
+  color: #CD001A;
+  margin-bottom: 10px;
+}
+
+section.about-us ol::before {
+  content: "Our Services"; /* Title for the ordered list */
+  font-weight: bold;
+  font-size: 20px;
+  color: #CD001A;
+  margin-bottom: 10px;
+}
+
+  </style>
+</head>
+<body class="font-sans">
+  <!-- Header Section -->
+  <header class="h-light">
+    <div class="container">
+        <input type="checkbox"/>
+        <img src="./assets/img/pastrylogo.png" alt="Doughlicious Creations" class="header-image" style="margin-top: 3px;"/>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="menu.html">Menu</a></li>
+        
+            <li><a href="index.html#reasons">Why us?</a></li>
+            <li><a href="#contact">Contact</a><i class="fa-solid fa-angle-down"></i>
+                <ul class="w-25">
+                    <li><a href="https://www.whatsapp.com/" target="_blank">Whatsapp</a></li>
+                    <li><a href="https://www.facebook.com/" target="_blank">Facebook</a></li>
+                    <li><a href="https://www.instagram.com/" target="_blank">Instagram</a></li>
+                </ul>
+                </li>
+                <li id="auth-links">
+                    <a href="register.html" id="register-link">Register</a>
+                    <a href="login.html" id="login-link">Login</a>
+                </li>
+                <li id="dashboard-links" style="display: none;">
+                    <a href="dashboard.html">Dashboard</a>
+                    <a href="#" id="logout-link"><i class="fa-solid fa-right-from-bracket"></i></a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+
+<div class="farms-container">
+  <!-- Farms Section -->
+  <section class="farms-section" id="farms-section">
+    <h2>Our Trusted Farms</h2>
+    <p>We collaborate with farms that prioritize sustainability and organic practices. Here are some of the farms where we source our products:</p>
+    <div class="farms-container">
+      <!-- Farm 1 -->
+      <div class="farm-card">
+        <img src="assets/img/sunriseorganics.jpeg" alt="Farm 1">
+        <div class="card-content">
+          <h3>Sunrise Organic Farm</h3>
+          <p>Located in the heart of the valley, Sunrise Organic Farm grows a wide variety of organic fruits and vegetables, ensuring the freshest produce for our customers.</p>
+        </div>
+      </div>
+      <!-- Farm 2 -->
+      <div class="farm-card">
+        <img src="assets/img/greenfieldfarm.avif" alt="Farm 2">
+        <div class="card-content">
+          <h3>Green Fields Farm</h3>
+          <p>Green Fields Farm is committed to sustainable farming methods and produces some of the highest-quality grains in the region, helping us maintain our quality promise.</p>
+        </div>
+      </div>
+      <!-- Farm 3 -->
+      <div class="farm-card">
+        <img src="assets/img/blueskyacres.jpeg" alt="Farm 3">
+        <div class="card-content">
+          <h3>Blue Sky Acres</h3>
+          <p>At Blue Sky Acres, livestock are raised in a humane environment with organic feed, producing healthy and delicious products we proudly offer.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<section class="about-us">
+  <h2>More Info About Us</h2>
+  <p>We are passionate about baking the most delightful pastries!</p>
+
+  <!-- Flex container for the lists -->
+  <div class="list-container">
+    <!-- Definition List: Key Information -->
+    <dl>
+      <dt>Our Mission</dt>
+      <dd>To create delicious, high-quality pastries that bring joy to every bite.</dd>
+
+      <dt>Our Vision</dt>
+      <dd>To be recognized as the top bakery offering the best pastries in the region.</dd>
+
+      <dt>Our Values</dt>
+      <dd>Quality, Freshness, Creativity, Customer Satisfaction</dd>
+    </dl>
+
+    <!-- Ordered List: Our Services -->
+    <ol>
+      <li style=" margin-top: 10px;">Freshly baked bread</li>
+      <li>Delicious pastries</li>
+      <li>Custom cakes for special occasions</li>
+      <li>Catering services for events</li>
+      <li>Free delivery for orders above $100</li>
+    </ol>
+  </div>
+
+</section>
+
+<section class="fun-facts-and-table">
+  <div class="fun-facts">
+    <h2>Fun Facts About Baking</h2>
+    <ul>
+      <li>
+        <canvas class="bullet" width="20" height="20"></canvas>
+        The Origins of Baking
+        <ul>
+          <li>
+            <canvas class="nested-bullet" width="12" height="12"></canvas>
+            Baking dates back to 2600 BC in Ancient Egypt.
+          </li>
+          <li>
+            <canvas class="nested-bullet" width="12" height="12"></canvas>
+            The first ovens were made of stone and used open fire.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <canvas class="bullet" width="20" height="20"></canvas>
+        Famous Baking Records
+        <ul>
+          <li>
+            <canvas class="nested-bullet" width="12" height="12"></canvas>
+            The world's largest cake weighed over 25,000 pounds.
+          </li>
+          <li>
+            <canvas class="nested-bullet" width="12" height="12"></canvas>
+            The longest baguette ever baked was 400 feet long!
+          </li>
+        </ul>
+      </li>
+      <li>
+        <canvas class="bullet" width="20" height="20"></canvas>
+        Science in Baking
+        <ul>
+          <li>
+            <canvas class="nested-bullet" width="12" height="12"></canvas>
+            Yeast is a living organism that helps dough rise.
+          </li>
+          <li>
+            <canvas class="nested-bullet" width="12" height="12"></canvas>
+            Baking is often compared to chemistry due to precise measurements.
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  
+  <!-- Baking Tools Section -->
+  <div class="baking-tools">
+    <h2>Essential Baking Tools</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Tool</th>
+          <th>Purpose</th>
+          <th>Material</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Rolling Pin</td>
+          <td>Flattening dough</td>
+          <td>Wood</td>
+        </tr>
+        <tr>
+          <td>Measuring Cups</td>
+          <td>Measuring ingredients</td>
+          <td>Plastic/Metal</td>
+        </tr>
+        <tr>
+          <td>Baking Sheet</td>
+          <td>Baking cookies or pastries</td>
+          <td>Aluminum</td>
+        </tr>
+        <tr>
+          <td>Whisk</td>
+          <td>Mixing ingredients</td>
+          <td>Stainless Steel</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+
+
+        <!-- Awards & Recognitions Section -->
+<section class="container awards-section">
+  <h2 class="section-title">Awards & Recognitions</h2>
+  <p class="intro-text">
+      Over the years, Doughlicious Creations has been honored with several awards and recognition for our commitment to quality, creativity, and service. We are proud to be acknowledged by our peers and customers alike.
+  </p>
+  <div class="awards-container">
+      <div class="award-card">
+          <img src="assets/img/bestbakery.webp" alt="Award 1">
+          <h3>Best Bakery in Sweet City - 2023</h3>
+          <p>Recognized for exceptional quality and customer service in the Sweet City Bakery Awards.</p>
+      </div>
+      <div class="award-card">
+          <img src="assets/img/top10.webp" alt="Award 2">
+          <h3>Top 10 Best Pastries - National Food Awards</h3>
+          <p>Our signature chocolate croissants were selected among the top 10 pastries in the country!</p>
+      </div>
+      <div class="award-card">
+          <img src="assets/img/eco-friendly.webp" alt="Award 3">
+          <h3>Eco-Friendly Business of the Year</h3>
+          <p>Honored for our commitment to sustainability and eco-conscious practices in baking.</p>
+      </div>
+  </div>
+</section>
+
+<!-- Nominations Section -->
+<section class="container nominations-section">
+  <h2 class="section-title">Nominations Through the Years</h2>
+  <p class="intro-text">Here are some of the nominations we have received over the years for excellence in our craft and dedication to quality.</p>
+  
+  <!-- Nominations Table -->
+  <table class="nominations-table">
+    <thead>
+      <tr>
+        <th>Year</th>
+        <th>Nomination</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>2024</td>
+        <td><svg class="star" width="24" height="24" fill="currentColor" viewBox="0 0 16 16"><path d="M8 12.354l3.146 1.658-.6-3.532L12 6.432l-3.56-.27L8 2 6.56 6.162 3 6.432l2.454 4.048-.6 3.532L8 12.354z"/></svg><strong>Best Artisan Bakery - Sweet City Awards</strong></td>
+      </tr>
+      <tr>
+        <td>2023</td>
+        <td><svg class="star" width="24" height="24" fill="currentColor" viewBox="0 0 16 16"><path d="M8 12.354l3.146 1.658-.6-3.532L12 6.432l-3.56-.27L8 2 6.56 6.162 3 6.432l2.454 4.048-.6 3.532L8 12.354z"/></svg><strong>Best Pastry Chef - National Food Awards</strong></td>
+      </tr>
+      <tr>
+        <td>2022</td>
+        <td><svg class="star" width="24" height="24" fill="currentColor" viewBox="0 0 16 16"><path d="M8 12.354l3.146 1.658-.6-3.532L12 6.432l-3.56-.27L8 2 6.56 6.162 3 6.432l2.454 4.048-.6 3.532L8 12.354z"/></svg><strong>Excellence in Sustainability - Green Business Awards</strong></td>
+      </tr>
+      <tr>
+        <td>2021</td>
+        <td><svg class="star" width="24" height="24" fill="currentColor" viewBox="0 0 16 16"><path d="M8 12.354l3.146 1.658-.6-3.532L12 6.432l-3.56-.27L8 2 6.56 6.162 3 6.432l2.454 4.048-.6 3.532L8 12.354z"/></svg><strong>Best Donuts - Local Bakery Awards</strong></td>
+      </tr>
+      <tr>
+        <td>2020</td>
+        <td><svg class="star" width="24" height="24" fill="currentColor" viewBox="0 0 16 16"><path d="M8 12.354l3.146 1.658-.6-3.532L12 6.432l-3.56-.27L8 2 6.56 6.162 3 6.432l2.454 4.048-.6 3.532L8 12.354z"/></svg><strong>Most Creative Desserts - Creative Culinary Awards</strong></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+
+
+<!-- Behind-the-Scenes Look Section -->
+<section class="container behind-the-scenes-section">
+  <h2 class="section-title">Behind the Scenes</h2>
+  <p class="intro-text">
+      Ever wondered what goes into creating our delicious pastries? Take a sneak peek into our kitchen and see how we bake up magic every day!
+  </p>
+  <div class="video-container">
+      <div class="video-card">
+          <h3>How We Make Our Signature Croissants</h3>
+          <video class="video-player" controls>
+              <source src="assets/videofiles/Baking video.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+          </video>
+      </div>
+      <div class="video-card">
+          <h3>A Day in Our Bakery</h3>
+          <video class="video-player" controls>
+              <source src="assets/videofiles/Croissants video.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+          </video>
+      </div>
+  </div>
+</section>
+
+<!--Audio Feedbacks-->
+<section class="container customer-feedback-section">
+  <h2 class="section-title">Customer Audio Feedback</h2>
+  <div class="feedback-container">
+      <div class="feedback-item">
+          <h3 class="feedback-title">Customer 1: Positive Experience</h3>
+          <p class="customer-name">John Doe</p>
+          <audio controls>
+              <source src="./assets/audiofiles/Ash-2024_11_12-5.wav" type="audio/mp3">
+              Your browser does not support the audio element.
+          </audio>
+      </div>
+      <div class="feedback-item">
+          <h3 class="feedback-title">Customer 2: Great Service</h3>
+          <p class="customer-name">Jane Smith</p>
+          <audio controls>
+              <source src="./assets/audiofiles/Ember-2024_11_12-1.wav" type="audio/mp3">
+              Your browser does not support the audio element.
+          </audio>
+      </div>
+  </div>
+</section>
+
+
+<footer class="f-light" id="contact">
+  <div class="container">
+      <div class="columns">
+      <div class="col-products">
+      <h2><span>Products</span></h2>
+      <ul>
+          <li><a href="#">Cakes</a></li>
+          <li><a href="#">Cupcakes</a></li>
+          <li><a href="#">Donuts</a></li>
+          <li><a href="#">Desserts</a></li>
+          <li><a href="#">Pastries</a></li>
+      </ul>
+      </div>
+
+      <div class="col-site">
+      <h2><span>Site</span></h2>
+      <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Menu</a></li>
+          <li><a href="#">Why us?</a></li>
+          <li><a href="#">Contact</a>
+      </ul>
+      </div>
+      
+      <div class="col-contact">
+          <h2><span>Contact Details</span></h2>  
+          <address>
+              <p>Pastry Lane, Sweetville, ST 12345</p>
+              <p>(123) 456-7890</p>
+              <p><a href="mailto:contact@doughliciouscreations.com">contact@doughliciouscreations.com</a></p>
+          </address>
+      </div>
+      
+      <div class="col-socials">
+      <h2><span>Socials</span></h2>
+      <ul>
+      <li><a href="https://www.whatsapp.com/" target="_blank"><i class="fa-brands fa-whatsapp"></i> Whatsapp</a></li>
+      <li><a href="https://www.facebook.com/" target="_blank"><i class="fa-brands fa-facebook"></i> Facebook</a></li>
+      <li><a href="https://www.instagram.com/" target="_blank"><i class="fa-brands fa-instagram"></i> Instagram</a></li>
+      </ul>
+      </div>
+      </div>
+  </div>
+</footer>
+
+
+<footer2 class="footer2">
+    <div class="container">
+            <div class="copyright">
+                <b>© DoughliciousCreations 2024</b>
+            </div>
+
+            <div class="terms-links">
+                <ul class="terms-list">
+                    <li><a href="#">Terms and Conditions</a></li>
+                    <li><a href="#">Privacy</a></li>
+                    <li><a href="#">Accessibility</a></li>
+                </ul>
+            </div>
+
+            <div class="social-icons">
+                <i class="fa-brands fa-square-facebook icon fb-icon"></i>
+                <i class="fa-brands fa-square-x-twitter icon"></i>
+                <i class="fa-brands fa-square-instagram icon ig-icon"></i>
+            </div>
+    </div>
+</footer2>
+
+<script src="App.js"></script>
+</body>
+</html>
