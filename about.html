@@ -445,7 +445,6 @@ section.about-us ol::before {
 
 <body class="font-sans">
 
-  <!-- Header Section -->
   <header class="h-light">
     <div class="container">
         <input type="checkbox"/>
@@ -907,20 +906,17 @@ function resetGame() {
 </script>
 
 <section class="quote-section" style="width: 100%; margin: 0 auto; padding: 35px; text-align: center; overflow: hidden;">
-  <!-- Canvas -->
-   <div style="margin-left: 100px;">
-  <div class="quote-canvas" style="float: left; margin-right: 80px; margin-left: 20px; width: 80px; height: 70px; margin-top: -30px;">
+  <div class="quote-container" style="position: relative; max-width: 800px; margin: 0 auto; text-align: left;">
+    <div class="quote-canvas" style="position: absolute; top: -20px; left: -20px;">
       <canvas id="quote-canvas" width="55" height="35"></canvas>
-  </div>
-  <!-- Quote Text -->
-  <div class="quote-text" style="font-size: 16px; color: #333; margin-bottom: -20px; margin-left: -240px; margin-top: -5px; width: 900px; text-align: left; display: inline-block;">
+    </div>
+    <div class="quote-text" style="font-size: 16px; color: #333;">
       <p>"Cooking is an art, but baking is a science. It's about precision, patience, and passion coming together to create something beautiful and delicious."</p>
       <p>- Anonymous</p>
+    </div>
   </div>
-</div>
-  <!-- Clear float to prevent layout issues -->
-  <div style="clear: both;"></div>
 </section>
+
 
 <script>
   window.onload = function() {

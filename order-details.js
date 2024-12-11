@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
     try {
         const urlParams = new URLSearchParams(window.location.search);
 const dessertId = urlParams.get('id');
-console.log('Dessert ID:', dessertId);  // Add this line to debug
+console.log('Dessert ID:', dessertId);  
 
 
         if (!dessertId) {
