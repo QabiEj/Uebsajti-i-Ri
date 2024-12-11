@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="https://www.flaticon.com/free-icons/chef">
   <link rel="stylesheet" href="./assets/css/variablat.css">
+  <script src="filterDesserts.js"></script>
+
   <style>
 
 #auth-links {
@@ -19,7 +21,6 @@
     display: none; 
     gap: 20px;
 }
-    /* Styling for the Auth Section */
     .auth-section {
       padding: 80px 0;
       background-color: #fef8f3; 
@@ -91,11 +92,100 @@
       text-decoration: underline;
     }
 
+    /* qeto duhet mi shtu te secili html */
+.contact-form {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    max-width: 90%;
+    z-index: 1000;
+}
+
+.contact-form h3 {
+    margin-bottom: 10px;
+    font-size: 1.5em;
+}
+
+.contact-form label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+.contact-form input, .contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.contact-form button {
+    padding: 10px 15px;
+    background-color: var(--brown);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.contact-form button:hover {
+    background-color: var(--h-color);
+}
+.popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .popup-content {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            width: 300px;
+        }
+
+        .popup.show {
+            display: flex;
+        }
+
+        .footer2 {
+    display: flex;
+    flex-direction: column; 
+    justify-content: space-between;
+    align-items: center; 
+    position: relative;
+   
+}
+
+#footer-date {
+    position: absolute;
+    top: 5px; 
+    font-size: 12px; 
+    text-align: center; 
+}
+
+
   </style>
+
 </head>
+
+
 <body class="font-sans">
 
-  <!-- Header Section -->
   <header class="h-light">
     <div class="container">
         <input type="checkbox"/>
@@ -112,14 +202,15 @@
                     <li><a href="https://www.whatsapp.com/" target="_blank">Whatsapp</a></li>
                     <li><a href="https://www.facebook.com/" target="_blank">Facebook</a></li>
                     <li><a href="https://www.instagram.com/" target="_blank">Instagram</a></li>
+                    <li><a href="mailto:doughliciouscreations1@gmail.com" target="_blank">Email</a></li>
                 </ul>
                 </li>
                 <li id="auth-links">
-                    <a href="register.html" id="register-link" style="margin-right: 20px;">Register</a>
+                    <a href="register.html" id="register-link">Register</a>
                     <a href="login.html" id="login-link">Login</a>
                 </li>
                 <li id="dashboard-links" style="display: none;">
-                    <a href="dashboard.html" style="margin-right: 20px;">Dashboard</a>
+                    <a href="dashboard.html">Dashboard</a>
                     <a href="#" id="logout-link"><i class="fa-solid fa-right-from-bracket"></i></a>
                 </li>
             </ul>
@@ -127,7 +218,6 @@
     </div>
 </header>
 
-  <!-- Registration Section -->
   <section class="auth-section">
     <div class="container">
       <h2>Register for sweet delights!</h2>
@@ -142,108 +232,278 @@
     </div>
   </section>
 
-  <!-- Footer Section -->
-  <footer class="f-light" id="contact">
-    <div class="container">
+  <div id="warning-container" style="position: fixed; top: 10px; left: 50%; transform: translateX(-50%); z-index: 1000;">
+  </div>
+
+ 
+<!-- //qeto deri nfund duhet mi shtu te secili html -->
+<footer class="f-light" id="contact">
+  <div class="container">
       <div class="columns">
-      <div class="col-products">
-      <h2><span>Products</span></h2>
-      <ul>
-          <li><a href="#">Cakes</a></li>
-          <li><a href="#">Cupcakes</a></li>
-          <li><a href="#">Donuts</a></li>
-          <li><a href="#">Desserts</a></li>
-          <li><a href="#">Pastries</a></li>
-      </ul>
+          <div class="col-products">
+              <h2><span>Products</span></h2>
+              <ul>
+                <li><a href="menu.html" onclick="filterDesserts('Cakes'); return false;">Cakes</a></li>
+                <li><a href="menu.html" onclick="filterDesserts('Cupcakes'); return false;">Cupcakes</a></li>
+                <li><a href="menu.html" onclick="filterDesserts('Donuts'); return false;">Donuts</a></li>
+                <li><a href="menu.html" onclick="filterDesserts('Desserts'); return false;">Desserts</a></li>
+                <li><a href="menu.html" onclick="filterDesserts('Pastries'); return false;">Pastries</a></li>
+            </ul>            
+          </div>
+
+          <div class="col-site">
+              <h2><span>Site</span></h2>
+              <ul>
+                  <li><a href="index.html">Home</a></li>
+                  <li><a href="about.html">About</a></li>
+                  <li><a href="menu.html">Menu</a></li>
+                  <li><a href="index.html#reasons">Why us?</a></li>
+                  <li><a href="#">Contact</a></li>
+              </ul>
+          </div>
+          
+          <div class="col-contact">
+              <h2><span>Contact Details</span></h2>
+              <address>
+                  <p>Pastry Lane, Sweetville, ST 12345</p>
+                  <p>(123) 456-7890</p>
+                  <p><a id="email-link" href="#" onclick="document.getElementById('contact-form').style.display = 'block'; return false;">doughliciouscreations1@gmail.com</a></p>
+
+              </address>
+          </div>
+          
+          <div class="col-socials">
+              <h2><span>Socials</span></h2>
+              <ul>
+                  <li><a href="https://www.whatsapp.com/" target="_blank"><i class="fa-brands fa-whatsapp"></i> Whatsapp</a></li>
+                  <li><a href="https://www.facebook.com/" target="_blank"><i class="fa-brands fa-facebook"></i> Facebook</a></li>
+                  <li><a href="https://www.instagram.com/" target="_blank"><i class="fa-brands fa-instagram"></i> Instagram</a></li>
+              </ul>
+          </div>
       </div>
+  </div>
+</footer>
+
+<div id="contact-form" class="contact-form" style="display: none;">
+  <button class="close-form" type="button">X</button>
+  <h3>Contact Us</h3>
+  <form id="contactForm">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
     
-      <div class="col-site">
-      <h2><span>Site</span></h2>
-      <ul>
-          <li><a href="#">Home</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Menu</a></li>
-          <li><a href="#">Why us?</a></li>
-          <li><a href="#">Contact</a>
-      </ul>
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+    
+    <label for="message">Message:</label>
+    <textarea id="message" name="message" required></textarea>
+    
+    <button type="submit">Submit</button> 
+</form>
+
+</div>
+
+    <div id="success-popup" class="popup">
+      <div class="popup-content">
+          <span class="close-btn">&times;</span>
+          <p>Your message has been sent successfully!</p>
       </div>
-      
-      <div class="col-contact">
-          <h2><span>Contact Details</span></h2>  
-          <address>
-              <p>Pastry Lane, Sweetville, ST 12345</p>
-              <p>(123) 456-7890</p>
-              <p><a href="mailto:contact@doughliciouscreations.com">contact@doughliciouscreations.com</a></p>
-          </address>
-      </div>
-      
-      <div class="col-socials">
-      <h2><span>Socials</span></h2>
-      <ul>
-      <li><a href="https://www.whatsapp.com/" target="_blank"><i class="fa-brands fa-whatsapp"></i> Whatsapp</a></li>
-      <li><a href="https://www.facebook.com/" target="_blank"><i class="fa-brands fa-facebook"></i> Facebook</a></li>
-      <li><a href="https://www.instagram.com/" target="_blank"><i class="fa-brands fa-instagram"></i> Instagram</a></li>
-      </ul>
-      </div>
-      </div>
+  </div>
+
+<script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+      const SERVICE_ID = "service_cma8dgh"; 
+      const TEMPLATE_ID = "template_kothtbc"; 
+      const MIN_WAIT_TIME = 3;  
+      const MAX_WAIT_TIME = 5;  
+
+      emailjs.init("-C-clPiF39yrBIRpw");
+
+      const emailLink = document.getElementById('email-link');
+      const contactForm = document.getElementById('contact-form');
+      const form = document.getElementById('contactForm');
+
+      if (!form) {
+          console.error("Form element not found. Please ensure the form has the correct ID.");
+          return;
+      }
+
+      emailLink.addEventListener('click', (e) => {
+          e.preventDefault();
+          contactForm.style.display = 'block'; 
+      });
+
+      contactForm.querySelector('.close-form').addEventListener('click', () => {
+          contactForm.style.display = 'none';
+      });
+
+      document.addEventListener('click', (e) => {
+          if (!contactForm.contains(e.target) && !emailLink.contains(e.target)) {
+              contactForm.style.display = 'none';
+          }
+      });
+
+      form.addEventListener('submit', function (e) {
+          e.preventDefault();
+
+          emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form)
+              .then(function(response) {
+                  console.log('Email sent successfully', response);
+                  showSuccessPopup();
+                  contactForm.style.display = 'none'; 
+                  form.reset(); 
+              }, function(error) {
+                  console.error('Error sending email', error);
+                  alert('Oops! Something went wrong. Please try again later.');
+              });
+      });
+
+      function showSuccessPopup() {
+          const successPopup = document.getElementById('success-popup');
+          successPopup.classList.add('show');
+          
+          const waitTime = Math.floor(Math.random() * (MAX_WAIT_TIME - MIN_WAIT_TIME + 1)) + MIN_WAIT_TIME;
+          console.log(`Popup will hide after ${waitTime} seconds.`);
+
+          setTimeout(() => {
+              successPopup.classList.remove('show');
+          }, waitTime * 1000); 
+      }
+  });
+  </script>
+
+<footer2 class="footer2">
+    <div class="container">
+            <div class="copyright">
+                <b>© DoughliciousCreations 2024</b>
+            </div>
+
+            <div class="terms-links">
+                <ul class="terms-list">
+                    <li><a href="#">Terms and Conditions</a></li>
+                    <li><a href="#">Privacy</a></li>
+                    <li><a href="#">Accessibility</a></li>
+                </ul>
+            </div>
+
+            <div class="social-icons">
+                <a href="https://www.facebook.com/"><i class="fa-brands fa-square-facebook icon fb-icon" style="color: black;"></i></a>
+                <a href="https://x.com/?lang=en"><i class="fa-brands fa-square-x-twitter icon" style="color: black;"></i></a>
+                <a href="https://www.instagram.com/"><i class="fa-brands fa-square-instagram icon ig-icon" style="color: black;"></i></a>
+            </div>
     </div>
-  </footer>
+    <small id="footer-date"></small>
+</footer2>
 
-  <footer2 class="footer2">
-      <div class="container">
-              <div class="copyright">
-                  <b>© DoughliciousCreations 2024</b>
-              </div>
-  
-              <div class="terms-links">
-                  <ul class="terms-list">
-                      <li><a href="#">Terms and Conditions</a></li>
-                      <li><a href="#">Privacy</a></li>
-                      <li><a href="#">Accessibility</a></li>
-                  </ul>
-              </div>
-  
-              <div class="social-icons">
-                  <i class="fa-brands fa-square-facebook icon fb-icon"></i>
-                  <i class="fa-brands fa-square-x-twitter icon"></i>
-                  <i class="fa-brands fa-square-instagram icon ig-icon"></i>
-              </div>
-      </div>
-  </footer2>
-
-  <script src="App.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+      const footerDate = new Date();
+      const formattedDate = footerDate.toLocaleDateString(); 
+      document.getElementById('footer-date').innerText = `Last updated: ${formattedDate}`;
+  });
+  </script>
 
   <script>
-document.querySelector('#register-form').addEventListener('submit', function(event) {
-  event.preventDefault();
+    function showMessage(message, type = 'warning', duration = 3000) {
+        const warning = document.createElement('div');
+        warning.classList.add('message');
+        warning.textContent = message;
 
-  const name = event.target.name.value;
-  const email = event.target.email.value;
-  const password = event.target.password.value;
-  const confirmPassword = event.target.confirmPassword.value;
+        if (type === 'warning') {
+            warning.style.backgroundColor = '#f44336';
+        } else if (type === 'success') {
+            warning.style.backgroundColor = '#4CAF50'; 
+        }
 
-  if (password !== confirmPassword) {
-    alert("Passwords do not match!");
-    return;
-  }
+        warning.style.color = '#fff';
+        warning.style.padding = '15px';
+        warning.style.margin = '100px';
+        warning.style.borderRadius = '5px';
+        warning.style.fontSize = '16px';
+        warning.style.textAlign = 'center';
+        warning.style.boxShadow = '0px 2px 10px rgba(0, 0, 0, 0.2)';
+        warning.style.transition = 'opacity 0.5s ease-out';
 
-  // Save user details in localStorage
-  const users = JSON.parse(localStorage.getItem('users')) || [];
-  if (users.some(user => user.email === email)) {
-    alert('Email already registered!');
-    return;
-  }
+        const container = document.getElementById('warning-container');
+        container.appendChild(warning);
 
-  users.push({ name, email, password }); // Store name, email, and password
-  localStorage.setItem('users', JSON.stringify(users));
+        setTimeout(() => {
+            warning.style.opacity = '0';
+            setTimeout(() => {
+                warning.remove();
+            }, 500);
+        }, duration);
+    }
 
-  alert('Registration successful!');
-  window.location.href = 'login.html'; // Redirect to login page
-});
+    function validateEmail(email) {
+        const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+        return emailPattern.test(email);
+    }
+
+    function validatePassword(password) {
+        const passwordPattern = /^[A-Za-z0-9]{6,}$/;  
+        return passwordPattern.test(password);
+    }
+
+    function validateName(name) {
+        const namePattern = /^[A-Za-z\s]+$/;
+        return namePattern.test(name);
+    }
+
+    document.querySelector('#register-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const name = event.target.name.value;
+        const email = event.target.email.value;
+        const password = event.target.password.value;
+        const confirmPassword = event.target.confirmPassword.value;
+
+        document.getElementById('warning-container').innerHTML = '';
+
+        if (!validateName(name)) {
+            showMessage('Name must only contain letters and spaces.', 'warning');
+            return;
+        }
+
+        if (!validateEmail(email)) {
+            showMessage('Please enter a valid email address.', 'warning');
+            return;
+        }
+
+        if (!validatePassword(password)) {
+            showMessage('Password must be exactly 6 characters long, containing only letters and numbers.', 'warning');
+            return;
+        }
+
+        if (password !== confirmPassword) {
+            showMessage('Passwords do not match!', 'warning');
+            return;
+        }
+
+        const users = JSON.parse(localStorage.getItem('users')) || [];
+        if (users.some(user => user.email === email)) {
+            showMessage('Email already registered!', 'warning');
+            return;
+        }
+
+        const registrationDate = new Date().toLocaleString();
+
+        users.push({ name, email, password, registrationDate });
+        localStorage.setItem('users', JSON.stringify(users));
+
+        showMessage('Registration successful!', 'success');
+        setTimeout(function() {
+            window.location.href = 'login.html';
+        }, 2000); 
+    });
 
 
-  </script>
-  
+    /* me test() edhe exec()
+    
+    
+    */
+</script>
 
 </body>
 </html>

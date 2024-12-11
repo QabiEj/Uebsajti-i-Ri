@@ -6,6 +6,7 @@
     <title>Doughlicious Creations - Dashboard</title>
     <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="filterDesserts.js"></script>
 
     <style>
     #auth-links {
@@ -22,8 +23,10 @@
             width: 100%;
             border-collapse: collapse;
             margin-top: 2rem;
-            font-family: 'Arial', sans-serif;
+            font-family: 'Nunito';
         }
+
+        
         .orders-table th,
         .orders-table td {
             padding: 12px 15px;
@@ -31,8 +34,8 @@
             border: 1px solid #f2f2f2;
         }
         .orders-table th {
-            background-color: #fce4b4;
-            color: #8a5a44;
+            background-color: #eaddba;
+            color: var(--h-color);
             font-size: 1.1rem;
         }
         .orders-table td {
@@ -47,28 +50,9 @@
             cursor: pointer;
         }
 
-        .status {
-            padding: 5px 10px;
-            border-radius: 12px;
-            font-weight: bold;
-            display: inline-block;
-        }
-        .status.pending {
-            background-color: #ffcc00;
-            color: white;
-        }
-        .status.delivered {
-            background-color: #4caf50;
-            color: white;
-        }
-        .status.cancelled {
-            background-color: #f44336;
-            color: white;
-        }
-
         .section-title {
             font-size: 2rem;
-            color: #8a5a44;
+            color: var(--h-color);
             text-align: center;
             font-weight: bold;
             margin-bottom: 1.5rem;
@@ -135,7 +119,7 @@
 
 #feedbackForm h3 {
     font-size: 1.5rem;
-    color: #8a5a44;
+    color: var(--h-color);
     margin-bottom: 15px;
 }
 
@@ -167,8 +151,105 @@
     background-color: #6d3f2d;
 }
 
+
+    #feedbackForm input:focus, #feedbackForm textarea:focus {
+        outline: 2px solid #8a5a44; 
+        outline-offset: 4px; 
+    }
+
+    #feedbackForm input:focus,
+    #feedbackForm textarea:focus {
+        box-shadow: 0 0 8px rgba(138, 90, 68, 0.5); 
+    }
+
+
+
+/* qeto duhet mi shtu te secili html */
+.contact-form {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    max-width: 90%;
+    z-index: 1000;
+}
+
+.contact-form h3 {
+    margin-bottom: 10px;
+    font-size: 1.5em;
+}
+
+.contact-form label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+.contact-form input, .contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.contact-form button {
+    padding: 10px 15px;
+    background-color: var(--brown);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.contact-form button:hover {
+    background-color: var(--h-color);
+}
+.popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .popup-content {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            width: 300px;
+        }
+
+        .popup.show {
+            display: flex;
+        }
+
+        .footer2 {
+    display: flex;
+    flex-direction: column; 
+    justify-content: space-between;
+    align-items: center; 
+    position: relative;
+   
+}
+
+#footer-date {
+    position: absolute;
+    top: 5px; 
+    font-size: 12px; 
+    text-align: center; 
+}
     </style>
-    
 </head>
 <body>
     <header class="h-light">
@@ -186,10 +267,11 @@
                             <li><a href="https://www.whatsapp.com/" target="_blank">Whatsapp</a></li>
                             <li><a href="https://www.facebook.com/" target="_blank">Facebook</a></li>
                             <li><a href="https://www.instagram.com/" target="_blank">Instagram</a></li>
+                            <li><a href="mailto:doughliciouscreations1@gmail.com" target="_blank">Email</a></li>
                         </ul>
                     </li>
                     <li id="auth-links">
-                        <a href="register.html" id="register-link" style="margin-right: 20px;">Register</a>
+                        <a href="register.html" id="register-link">Register</a>
                         <a href="login.html" id="login-link">Login</a>
                     </li>
                     <li id="dashboard-links" style="display: none;">
@@ -205,7 +287,7 @@
         <div class="container mx-auto">
             <h2 class="section-title">Order Management</h2>
 
-            <!-- Table to Display Orders (unchanged) -->
+            
             <div id="orders" class="mt-12">
                 <table class="orders-table" id="orders-table">
                     <thead>
@@ -221,24 +303,23 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- Orders will be dynamically inserted here -->
+                       
                     </tbody>
                 </table>
             </div>
 
-<!-- Modal for Feedback -->
+
 <div id="feedbackModal" class="modal">
     <div class="modal-content">
         <div class="modal-header">
             <span class="close" id="closeModal">&times;</span>
-            <h2 id="modalTitle">Would you like to give feedback?</h2> <!-- Title that will change -->
+            <h2 id="modalTitle">Would you like to give feedback?</h2>
         </div>
         <div id="feedbackQuestion" class="modal-footer">
             <button id="btnYes">Yes</button>
             <button id="btnNo">No</button>
         </div>
 
-        <!-- Feedback Form (initially hidden) -->
         <div id="feedbackForm" style="display: none;">
             <form id="feedbackFormContent">
                 <label for="email">Email:</label>
@@ -251,166 +332,322 @@
         </div>
     </div>
 </div>
-
-
         </div>
     </section>
 
-    <footer class="f-light" id="contact">
-        <div class="container">
-            <div class="columns">
-                <div class="col-products">
-                    <h2><span>Products</span></h2>
-                    <ul>
-                        <li><a href="#">Cakes</a></li>
-                        <li><a href="#">Cupcakes</a></li>
-                        <li><a href="#">Donuts</a></li>
-                        <li><a href="#">Desserts</a></li>
-                        <li><a href="#">Pastries</a></li>
-                    </ul>
-                </div>
-
-                <div class="col-site">
-                    <h2><span>Site</span></h2>
-                    <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Menu</a></li>
-                        <li><a href="#">Why us?</a></li>
-                        <li><a href="#">Contact</a></li>
-                    </ul>
-                </div>
-
-                <div class="col-contact">
-                    <h2><span>Contact Details</span></h2>  
-                    <address>
-                        <p>Pastry Lane, Sweetville, ST 12345</p>
-                        <p>(123) 456-7890</p>
-                        <p><a href="mailto:contact@doughliciouscreations.com">contact@doughliciouscreations.com</a></p>
-                    </address>
-                </div>
-
-                <div class="col-socials">
-                    <h2><span>Socials</span></h2>
-                    <ul>
-                        <li><a href="https://www.whatsapp.com/" target="_blank"><i class="fa-brands fa-whatsapp"></i> Whatsapp</a></li>
-                        <li><a href="https://www.facebook.com/" target="_blank"><i class="fa-brands fa-facebook"></i> Facebook</a></li>
-                        <li><a href="https://www.instagram.com/" target="_blank"><i class="fa-brands fa-instagram"></i> Instagram</a></li>
-                    </ul>
-                </div>
+<!-- //qeto deri nfund duhet mi shtu te secili html -->
+<footer class="f-light" id="contact">
+    <div class="container">
+        <div class="columns">
+            <div class="col-products">
+                <h2><span>Products</span></h2>
+                <ul>
+                    <li><a href="menu.html" onclick="filterDesserts('Cakes'); return false;">Cakes</a></li>
+                    <li><a href="menu.html" onclick="filterDesserts('Cupcakes'); return false;">Cupcakes</a></li>
+                    <li><a href="menu.html" onclick="filterDesserts('Donuts'); return false;">Donuts</a></li>
+                    <li><a href="menu.html" onclick="filterDesserts('Desserts'); return false;">Desserts</a></li>
+                    <li><a href="menu.html" onclick="filterDesserts('Pastries'); return false;">Pastries</a></li>
+                </ul>
+                
+            </div>
+  
+            <div class="col-site">
+                <h2><span>Site</span></h2>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="menu.html">Menu</a></li>
+                    <li><a href="index.html#reasons">Why us?</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            
+            <div class="col-contact">
+                <h2><span>Contact Details</span></h2>
+                <address>
+                    <p>Pastry Lane, Sweetville, ST 12345</p>
+                    <p>(123) 456-7890</p>
+                    <p><a id="email-link" href="#" onclick="document.getElementById('contact-form').style.display = 'block'; return false;">doughliciouscreations1@gmail.com</a></p>
+  
+                </address>
+            </div>
+            
+            <div class="col-socials">
+                <h2><span>Socials</span></h2>
+                <ul>
+                    <li><a href="https://www.whatsapp.com/" target="_blank"><i class="fa-brands fa-whatsapp"></i> Whatsapp</a></li>
+                    <li><a href="https://www.facebook.com/" target="_blank"><i class="fa-brands fa-facebook"></i> Facebook</a></li>
+                    <li><a href="https://www.instagram.com/" target="_blank"><i class="fa-brands fa-instagram"></i> Instagram</a></li>
+                </ul>
             </div>
         </div>
-    </footer>
+    </div>
+  </footer>
+  
+  <div id="contact-form" class="contact-form" style="display: none;">
+    <button class="close-form" type="button">X</button> 
+    <h3>Contact Us</h3>
+    <form id="contactForm">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+      
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+      
+      <label for="message">Message:</label>
+      <textarea id="message" name="message" required></textarea>
+      
+      <button type="submit">Submit</button> 
+  </form>
+  
+  </div>
+  
+  
+      <!-- Success Popup -->
+      <div id="success-popup" class="popup">
+        <div class="popup-content">
+            <span class="close-btn">&times;</span>
+            <p>Your message has been sent successfully!</p>
+        </div>
+    </div>
+  
+  <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const SERVICE_ID = "service_cma8dgh"; 
+        const TEMPLATE_ID = "template_kothtbc"; 
+        const MIN_WAIT_TIME = 3;  
+        const MAX_WAIT_TIME = 5;  
+  
+        emailjs.init("-C-clPiF39yrBIRpw");
+  
+        const emailLink = document.getElementById('email-link');
+        const contactForm = document.getElementById('contact-form');
+        const form = document.getElementById('contactForm');
+  
+        if (!form) {
+            console.error("Form element not found. Please ensure the form has the correct ID.");
+            return;
+        }
+  
+        emailLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            contactForm.style.display = 'block'; 
+        });
+  
+        contactForm.querySelector('.close-form').addEventListener('click', () => {
+            contactForm.style.display = 'none';
+        });
+  
+        document.addEventListener('click', (e) => {
+            if (!contactForm.contains(e.target) && !emailLink.contains(e.target)) {
+                contactForm.style.display = 'none';
+            }
+        });
+  
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+  
+            emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form)
+                .then(function(response) {
+                    console.log('Email sent successfully', response);
+                    showSuccessPopup();
+                    contactForm.style.display = 'none'; 
+                    form.reset(); 
+                }, function(error) {
+                    console.error('Error sending email', error);
+                    alert('Oops! Something went wrong. Please try again later.');
+                });
+        });
+  
+        function showSuccessPopup() {
+            const successPopup = document.getElementById('success-popup');
+            successPopup.classList.add('show');
+            
+            const waitTime = Math.floor(Math.random() * (MAX_WAIT_TIME - MIN_WAIT_TIME + 1)) + MIN_WAIT_TIME;
+            console.log(`Popup will hide after ${waitTime} seconds.`);
+  
+            setTimeout(() => {
+                successPopup.classList.remove('show');
+            }, waitTime * 1000); 
+        }
+    });
+
+    
+    </script>
+  
+  <footer2 class="footer2">
+      <div class="container">
+              <div class="copyright">
+                  <b>© DoughliciousCreations 2024</b>
+              </div>
+  
+              <div class="terms-links">
+                  <ul class="terms-list">
+                      <li><a href="#">Terms and Conditions</a></li>
+                      <li><a href="#">Privacy</a></li>
+                      <li><a href="#">Accessibility</a></li>
+                  </ul>
+              </div>
+  
+              <div class="social-icons">
+                <a href="https://www.facebook.com/"><i class="fa-brands fa-square-facebook icon fb-icon" style="color: black;"></i></a>
+                <a href="https://x.com/?lang=en"><i class="fa-brands fa-square-x-twitter icon" style="color: black;"></i></a>
+                <a href="https://www.instagram.com/"><i class="fa-brands fa-square-instagram icon ig-icon" style="color: black;"></i></a>
+            </div>
+      </div>
+      <small id="footer-date"></small>
+  </footer2>
+  
+
+  <!-- qetu thjesht e kom shkru me objekt konstruktor, me e provu , e dmth e ka tnjejtin funksion si te html files tjera -->
+   <!-- eshte javascript per pjesen e footer2 -->
+  <script>
+function FooterDate(elementId) {
+    this.elementId = elementId;
+
+    this.updateDate = function() {
+        const footerDate = new Date();
+        const formattedDate = footerDate.toLocaleDateString(); 
+        document.getElementById(this.elementId).innerText = `Last updated: ${formattedDate}`;
+    };
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    const footer = new FooterDate('footer-date');
+    footer.updateDate();
+});
+
+    </script>
 
 <script src="App.js"></script>
 
 <script>
     window.onload = () => {
+        
         const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
         if (!isLoggedIn) {
             window.location.href = 'login.html';
             return;
         }
 
-        // Retrieve the logged-in user's email from localStorage under 'currentUser'
         const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        const loggedInEmail = currentUser?.email; // Assuming the currentUser object contains an 'email' field
+        const loggedInEmail = currentUser?.email;
 
         if (!loggedInEmail) {
             alert('User not found or email missing.');
             return;
         }
 
-        const orders = JSON.parse(localStorage.getItem('orders')) || [];
-        const ordersContainer = document.querySelector('#orders-table tbody');
-
-        if (orders.length === 0) {
-            ordersContainer.innerHTML = '<tr><td colspan="8">No orders found. Start ordering!</td></tr>';
-        } else {
-            orders.forEach((order, index) => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${index + 1}</td>
-                    <td>${order.name}</td>
-                    <td>${order.surname}</td>
-                    <td>${order.dessertName}</td>
-                    <td>${order.quantity}</td>
-                    <td>${parseFloat(order.price).toFixed(2)}</td>
-                    <td>${order.date}</td>
-                    <td>${(parseFloat(order.price) * parseInt(order.quantity)).toFixed(2)}</td>
-                `;
-                ordersContainer.appendChild(row);
-            });
-        }
-
-        // Modal for feedback
-        const feedbackModal = document.getElementById('feedbackModal');
-        const closeModal = document.getElementById('closeModal');
-        const btnYes = document.getElementById('btnYes');
-        const btnNo = document.getElementById('btnNo');
-        const feedbackForm = document.getElementById('feedbackForm');
-        const feedbackQuestion = document.getElementById('feedbackQuestion');
-        const modalTitle = document.getElementById('modalTitle');
-
-        // Show the feedback modal after 1 second
-        setTimeout(() => {
-            feedbackModal.style.display = 'block';
-        }, 1000);
-
-        closeModal.onclick = () => {
-            feedbackModal.style.display = 'none';
-        };
-
-        btnYes.onclick = () => {
-            feedbackQuestion.style.display = 'none';  // Hide the Yes/No question
-            modalTitle.innerHTML = 'Please provide your feedback'; // Change modal title
-            feedbackForm.style.display = 'block'; // Show the feedback form
-        };
-
-        btnNo.onclick = () => {
-            feedbackModal.style.display = 'none'; // Hide the modal when No is clicked
-        };
-
-        // Handle feedback form submission
-        const feedbackFormContent = document.getElementById('feedbackFormContent');
-        feedbackFormContent.onsubmit = (event) => {
-            event.preventDefault();
-
-            const email = document.getElementById('email').value.trim().toLowerCase(); // Normalize input email
-            const feedbackText = document.getElementById('feedbackText').value;
-
-            // Normalize the stored email
-            const normalizedLoggedInEmail = loggedInEmail.trim().toLowerCase();
-
-            // Check if the email matches the logged-in user's email
-            if (email !== normalizedLoggedInEmail) {
-                alert("The email entered doesn't match the logged-in user's email.");
-                return;
+        class OrdersManager {
+            constructor() {
+                this.orders = JSON.parse(localStorage.getItem('orders')) || [];
+                this.ordersContainer = document.querySelector('#orders-table tbody');
             }
 
-            const feedback = {
-                email,
-                feedbackText,
-                date: new Date().toLocaleString()
-            };
+            renderOrders() {
+                if (this.orders.length === 0) {
+                    this.ordersContainer.innerHTML = '<tr><td colspan="8">No orders found. Start ordering!</td></tr>';
+                } else {
+                    this.orders.forEach((order, index) => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${index + 1}</td>
+                            <td>${order.name}</td>
+                            <td>${order.surname}</td>
+                            <td>${order.dessertName}</td>
+                            <td>${order.quantity}</td>
+                            <td>${parseFloat(order.price).toFixed(2)}</td>
+                            <td>${order.date}</td>
+                            <td>${(parseFloat(order.price) * parseInt(order.quantity)).toFixed(2)}</td>
+                        `;
+                        this.ordersContainer.appendChild(row);
+                    });
+                }
+            }
+        }
 
-            const feedbacks = JSON.parse(localStorage.getItem('feedbacks')) || [];
-            feedbacks.push(feedback);
-            localStorage.setItem('feedbacks', JSON.stringify(feedbacks));
+        const ordersManager = new OrdersManager();
+        ordersManager.renderOrders();
 
-            localStorage.setItem('feedbackSubmitted', 'true');
+        class FeedbackModalManager {
+            constructor(loggedInEmail) {
+                this.loggedInEmail = loggedInEmail;
+                this.feedbackModal = document.getElementById('feedbackModal');
+                this.closeModal = document.getElementById('closeModal');
+                this.btnYes = document.getElementById('btnYes');
+                this.btnNo = document.getElementById('btnNo');
+                this.feedbackForm = document.getElementById('feedbackForm');
+                this.feedbackQuestion = document.getElementById('feedbackQuestion');
+                this.modalTitle = document.getElementById('modalTitle');
+                this.feedbackFormContent = document.getElementById('feedbackFormContent');
 
-            modalTitle.innerHTML = 'Thank you for your feedback!';
-            feedbackForm.style.display = 'none';  
+                this.setEventListeners();
+                this.showModalAfterDelay();
+            }
 
-            setTimeout(() => {
-                feedbackModal.style.display = 'none'; 
-            }, 1500);
+            showModalAfterDelay() {
+                setTimeout(() => {
+                    this.feedbackModal.style.display = 'block';
+                }, 1000);
+            }
 
-            document.getElementById('email').value = '';
-            document.getElementById('feedbackText').value = '';
-        };
+            setEventListeners() {
+                this.closeModal.onclick = () => this.closeModalHandler();
+                this.btnYes.onclick = () => this.showFeedbackForm();
+                this.btnNo.onclick = () => this.closeModalHandler();
+                this.feedbackFormContent.onsubmit = (event) => this.submitFeedback(event);
+            }
+
+            closeModalHandler() {
+                this.feedbackModal.style.display = 'none';
+            }
+
+            showFeedbackForm() {
+                this.feedbackQuestion.style.display = 'none';
+                this.modalTitle.innerHTML = 'Please provide your feedback';
+                this.feedbackForm.style.display = 'block';
+            }
+
+            submitFeedback(event) {
+                event.preventDefault();
+
+                const email = document.getElementById('email').value.trim().toLowerCase();
+                const feedbackText = document.getElementById('feedbackText').value;
+
+                if (email !== this.loggedInEmail.trim().toLowerCase()) {
+                    alert("The email entered doesn't match the logged-in user's email.");
+                    return;
+                }
+
+                const feedback = {
+                    email,
+                    feedbackText,
+                    date: new Date().toLocaleString()
+                };
+
+                const feedbacks = JSON.parse(localStorage.getItem('feedbacks')) || [];
+                feedbacks.push(feedback);
+                localStorage.setItem('feedbacks', JSON.stringify(feedbacks));
+
+                localStorage.setItem('feedbackSubmitted', 'true');
+
+                this.modalTitle.innerHTML = 'Thank you for your feedback!';
+                this.feedbackForm.style.display = 'none';
+
+                setTimeout(() => {
+                    this.feedbackModal.style.display = 'none';
+                }, 1500);
+
+                document.getElementById('email').value = '';
+                document.getElementById('feedbackText').value = '';
+            }
+        }
+
+        const feedbackModalManager = new FeedbackModalManager(loggedInEmail);
     };
 </script>
+
 </body>
 </html>
